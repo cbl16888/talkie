@@ -13,11 +13,18 @@ flutter talkie codec
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Your Company' => 'email@example.com' }
   s.source           = { :path => '.' }
-  s.source_files = 'Classes/**/*'
+  # 添加 C 语言静态库
+  s.ios.vendored_libraries = 'lib/talkie.a'
+  s.source_files = 'Classes/**/*.{h,m,mm}'
+
+  # 确保头文件可被 Objective-C/Swift 代码找到
+  # Classes/**/*.h 确保插件本身的头文件可找到
+  # lib/**/*.h 确保 C 库的头文件可找到
+  s.public_header_files = 'Classes/**/*.h', 'lib/**/*.h'
+
   s.dependency 'Flutter'
   s.platform = :ios, '12.0'
 
   # Flutter.framework does not contain a i386 slice.
-  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
   s.swift_version = '5.0'
 end
