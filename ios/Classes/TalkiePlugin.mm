@@ -32,9 +32,11 @@
     } else if ([@"getFrameDuration" isEqualToString:call.method]) {
         result(@([_talkieBridge getFrameDuration]));
     } else if ([@"encode" isEqualToString:call.method]) {
-        result([_talkieBridge encodeFrame:call.arguments]);
+        NSData *data = call.arguments[@"data"];
+        result([_talkieBridge encodeFrame:data]);
     } else if ([@"decode" isEqualToString:call.method]) {
-        result([_talkieBridge decodeFrame:call.arguments]);
+        NSData *data = call.arguments[@"data"];
+        result([_talkieBridge decodeFrame:data]);
     } else {
       result(FlutterMethodNotImplemented);
     }
