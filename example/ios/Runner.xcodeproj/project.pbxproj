@@ -54,6 +54,8 @@
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
+		848CEF2E2DEFD80E005FB54F /* talkie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = talkie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		848CEF302DEFED0F005FB54F /* libTalkie.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTalkie.a; path = ../../ios/Classes/libs/libTalkie.a; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Flutter/Debug.xcconfig; sourceTree = "<group>"; };
 		9740EEB31CF90195004384FC /* Generated.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Generated.xcconfig; path = Flutter/Generated.xcconfig; sourceTree = "<group>"; };
 		97C146EE1CF9000F007C117D /* Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Runner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,6 +147,8 @@
 		9ED39E9BAD81E49FA4094DE2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				848CEF302DEFED0F005FB54F /* libTalkie.a */,
+				848CEF2E2DEFD80E005FB54F /* talkie.framework */,
 				410B7CEB97C041893B0E2550 /* Pods_Runner.framework */,
 				B7C8A12A106F797860004DA3 /* Pods_RunnerTests.framework */,
 			);
@@ -342,7 +346,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build";
+			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\n";
 		};
 		BC9A44CBD86DD84BD52A9D88 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

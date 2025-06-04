@@ -13,14 +13,24 @@ flutter talkie codec
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Your Company' => 'email@example.com' }
   s.source           = { :path => '.' }
-  # 添加 C 语言静态库
-  s.ios.vendored_libraries = 'lib/talkie.a'
-  s.source_files = 'Classes/**/*.{h,m,mm}'
+  s.static_framework = true # 如果你的插件是给 Flutter 用的，建议加上
+  s.ios.vendored_libraries = 'Classes/libs/libtalkie.a'
 
-  # 确保头文件可被 Objective-C/Swift 代码找到
-  # Classes/**/*.h 确保插件本身的头文件可找到
-  # lib/**/*.h 确保 C 库的头文件可找到
-  s.public_header_files = 'Classes/**/*.h', 'lib/**/*.h'
+  s.source_files = 'Classes/**/*.{h,m,mm,cpp,c}'
+  s.public_header_files = [
+    'Classes/**/*.h',
+    'Classes/libs/*.h'
+  ]
+
+  s.libraries = 'c++'
+
+  # 配置搜索路径
+  s.pod_target_xcconfig = {
+    'HEADER_SEARCH_PATHS'  => '$(PODS_TARGET_SRCROOT)/Classes/libs $(PODS_TARGET_SRCROOT)/Classes',
+    'LIBRARY_SEARCH_PATHS' => '$(PODS_TARGET_SRCROOT)/Classes/libs',
+    'CLANG_CXX_LANGUAGE_STANDARD' => 'c++17',
+    'CLANG_CXX_LIBRARY' => 'libc++'
+  }
 
   s.dependency 'Flutter'
   s.platform = :ios, '12.0'

@@ -1,14 +1,4 @@
-#include <stdbool.h>
-#include <stdint.h>
 
-#ifndef TALKIE_H
-#define TALKIE_H
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-// 函数声明
 // 初始化
 bool initCodec();
 
@@ -29,9 +19,3 @@ int getSampleRate();
 
 // 获取帧时长
 int getFrameDuration();
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif // TALKIE_H
