@@ -32,11 +32,11 @@
     } else if ([@"getFrameDuration" isEqualToString:call.method]) {
         result(@([_talkieBridge getFrameDuration]));
     } else if ([@"encode" isEqualToString:call.method]) {
-        NSData *data = call.arguments[@"data"];
-        result([_talkieBridge encodeFrame:data]);
+        FlutterStandardTypedData *typedData = call.arguments[@"data"];
+        result([_talkieBridge encodeFrame:typedData.data]);
     } else if ([@"decode" isEqualToString:call.method]) {
-        NSData *data = call.arguments[@"data"];
-        result([_talkieBridge decodeFrame:data]);
+        FlutterStandardTypedData *typedData = call.arguments[@"data"];
+        result([_talkieBridge decodeFrame:typedData.data]);
     } else {
       result(FlutterMethodNotImplemented);
     }
