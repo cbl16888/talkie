@@ -33,10 +33,60 @@
         result(@([_talkieBridge getFrameDuration]));
     } else if ([@"encode" isEqualToString:call.method]) {
         FlutterStandardTypedData *typedData = call.arguments[@"data"];
-        result([_talkieBridge encodeFrame:typedData.data]);
+        NSData *byteData = typedData.data;
+        NSUInteger bufferSize = [_talkieBridge getFrameSize];
+        NSUInteger offset = 0;
+        NSMutableData *encodedData = [NSMutableData data];
+        while (offset < byteData.length) {
+            NSUInteger chunkSize = MIN(bufferSize, byteData.length - offset);
+            NSData *chunk = [byteData subdataWithRange:NSMakeRange(offset, chunkSize)];
+            NSMutableData *paddedChunk = [NSMutableData dataWithData:chunk];
+            // 数据不够时补0
+            if (chunk.length < bufferSize) {
+                NSUInteger paddingLength = bufferSize - chunk.length;
+                uint8_t zero[paddingLength];
+                memset(zero, 0, paddingLength);
+                [paddedChunk appendBytes:zero length:paddingLength];
+            }
+            // 编码（假设 talk.encodeFrame 方法接受 NSData 或指针并返回 NSData*）
+            NSData *encoded = [_talkieBridge encodeFrame:paddedChunk];
+            if (encoded && encoded.length > 0) {
+                [encodedData appendData:encoded];
+//                NSLog(@"编码后的数据: %@，编码后的长度是: %lu", encoded, (unsigned long)encoded.length);
+            } else {
+//                NSLog(@"编码失败");
+            }
+            offset += chunkSize;
+        }
+        result(encodedData);
     } else if ([@"decode" isEqualToString:call.method]) {
         FlutterStandardTypedData *typedData = call.arguments[@"data"];
-        result([_talkieBridge decodeFrame:typedData.data]);
+        NSData *byteData = typedData.data;
+        NSUInteger bufferSize = [_talkieBridge getEncodedFrameSize];
+        NSUInteger offset = 0;
+        NSMutableData *decodedData = [NSMutableData data];
+        while (offset < byteData.length) {
+            NSUInteger chunkSize = MIN(bufferSize, byteData.length - offset);
+            NSData *chunk = [byteData subdataWithRange:NSMakeRange(offset, chunkSize)];
+            NSMutableData *paddedChunk = [NSMutableData dataWithData:chunk];
+            // 数据不够时补0
+            if (chunk.length < bufferSize) {
+                NSUInteger paddingLength = bufferSize - chunk.length;
+                uint8_t zero[paddingLength];
+                memset(zero, 0, paddingLength);
+                [paddedChunk appendBytes:zero length:paddingLength];
+            }
+            // 编码（假设 talk.encodeFrame 方法接受 NSData 或指针并返回 NSData*）
+            NSData *decoded = [_talkieBridge decodeFrame:paddedChunk];
+            if (decoded && decoded.length > 0) {
+                [decodedData appendData:decoded];
+//                NSLog(@"解码后的数据: %@，解码后的长度是: %lu", encoded, (unsigned long)encoded.length);
+            } else {
+//                NSLog(@"解码失败");
+            }
+            offset += chunkSize;
+        }
+        result(decodedData);
     } else {
       result(FlutterMethodNotImplemented);
     }
