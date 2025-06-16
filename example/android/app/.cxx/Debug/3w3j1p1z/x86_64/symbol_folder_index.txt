@@ -1,0 +1,1 @@
+/Users/admin/Documents/GitRepo/talkie/example/build/app/intermediates/cxx/Debug/3w3j1p1z/obj/x86_64

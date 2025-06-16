@@ -32,16 +32,41 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
-            TextButton(onPressed: () {
-              _talkiePlugin.init().then((value) {
-                print("init: $value");
-              });
-            }, child: const Text("init codec")),
-            TextButton(onPressed: () {
-              _talkiePlugin.getFrameSize().then((value) {
-                print("getFrameSize: $value");
-              });
-            }, child: const Text("getFrameSize"))
+            TextButton(
+                onPressed: () {
+                  _talkiePlugin.init().then((value) {
+                    print("init: $value");
+                  });
+                },
+                child: const Text("init codec")),
+            TextButton(
+                onPressed: () {
+                  _talkiePlugin.getFrameSize().then((value) {
+                    print("getFrameSize: $value");
+                  });
+                },
+                child: const Text("getFrameSize")),
+            TextButton(
+                onPressed: () {
+                  _talkiePlugin.getEncodedFrameSize().then((value) {
+                    print("getEncodedFrameSize: $value");
+                  });
+                },
+                child: const Text("getEncodedFrameSize")),
+            TextButton(
+                onPressed: () {
+                  _talkiePlugin.getSampleRate().then((value) {
+                    print("getSampleRate: $value");
+                  });
+                },
+                child: const Text("getSampleRate")),
+            TextButton(
+                onPressed: () {
+                  _talkiePlugin.getFrameDuration().then((value) {
+                    print("getFrameDuration: $value");
+                  });
+                },
+                child: const Text("getFrameDuration"))
           ],
         ),
       ),
